@@ -44,7 +44,7 @@ import sqlite3
 import pandas as pd
 import pathlib
 ```
-## Create Database(db)co
+## Create Database(db)
 ```
  # Define the database file in the current root project directory
  db_file = pathlib.Path("project.sqlite3")
