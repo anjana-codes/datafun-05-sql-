@@ -24,6 +24,6 @@ CREATE TABLE books (
 
 CREATE TABLE authors (
     author_id TEXT PRIMARY KEY,
-    first_name TEXT,
-    last_name TEXT,
+    first TEXT,
+    last TEXT,
 );
