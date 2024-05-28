@@ -44,6 +44,9 @@ import sqlite3
 import pandas as pd
 import pathlib
 ```
+## Add data folder and .csv
+Added a data folder to the project folder, then added two .csv files (authors and books) in VS Code.
+
 ## Create Database(db)
 ```
  # Define the database file in the current root project directory
