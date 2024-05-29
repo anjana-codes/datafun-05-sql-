@@ -32,15 +32,3 @@ CREATE TABLE books (
     author_id TEXT,
     FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
-
-<<<<<<< HEAD
-=======
--- Create the authors table 
--- Note that the author table has no foreign keys, so it is a standalone table
-
-CREATE TABLE authors (
-    author_id TEXT PRIMARY KEY,
-    first TEXT,
-    last TEXT,
-);
->>>>>>> 33a7133ea440a5317b8d150609cab927d02eb8c5
