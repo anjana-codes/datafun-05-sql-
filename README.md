@@ -87,11 +87,13 @@ select * from books;
 4. Create update_records.sql file
 ```
 #update records in the authors table where first name contains 'F. Scott'
+
 update authors
 set first = 'Anjana', last = 'Dhakal'
 where first = 'F. Scott';
 
 #update records in the books table where year_published is 1960
+
 set title = 'The Great Mountains'
 where year_published = '1960';
 ```
@@ -136,7 +138,13 @@ order by year_published;
 select a.first, a.last, b.title, b.year_published
 from authors a
 inner join books b on a.author_id = b.author_id;
+```
 
+## Git add and commit
+```
+git add .
+git commit -m "project is done"
+git push origin main
 ```
 
 ## Source
