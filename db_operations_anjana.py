@@ -1,3 +1,8 @@
+'''
+Here, I created a databse, added tables to the databse, filled the tables with data from both CSV and .sql files.
+Then worked on different SQL operations like update, delete, sorting, join etc. 
+All of this is doccumented in the README.
+'''
 import sqlite3
 import pandas as pd
 import pathlib
@@ -118,10 +123,45 @@ def query_sorting():
             cursor = conn.execute(sql_script)
             books = cursor.fetchall()
             for book in books:
-                print(book[1], book[2])  # Print year_published 
+                print(book[1], book[2])  # Print title and year_published 
     except sqlite3.Error as e:
         print("Error sorting book data:", e)
 
+def query_group_by():
+    """Function to execute SQL query with GROUP BY clause and display the count of each grouping."""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("query_group_by.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            cursor = conn.cursor()
+            cursor.execute(sql_script)
+            results = cursor.fetchall()
+            column_names = [description[0] for description in cursor.description]
+            print(" | ".join(column_names))
+            print("-" * (len(" | ".join(column_names)) + 10))
+            for row in results:
+             print(" | ".join(map(str, row))) 
+    except sqlite3.Error as e:
+        print("Error executing query:", e)
+
+def query_join():
+    """Function to read and execute SQL statements to perform INNER JOIN and display the results"""
+    try:
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("query_join.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            cursor = conn.execute(sql_script)
+            results = cursor.fetchall()
+            column_names = [description[0] for description in cursor.description]
+            print(" | ".join(column_names))
+            print("-" * (len(" | ".join(column_names)) + 10))
+            for row in results:
+             print(" | ".join(map(str, row)))
+    except sqlite3.Error as e:
+        print("Error executing query:", e)      
 
 def main():
     insert_data_from_csv()
@@ -132,7 +172,8 @@ def main():
     query_aggregation()
     query_filter()
     query_sorting()
-  
+    query_group_by()
+    query_join()
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,9 @@
 import sqlite3
 import pandas as pd
 import pathlib
+import logging
+
+logging.basicConfig(filename='log.txt', level=logging.DEBUG, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Define the database file in the current root project directory
 db_file = pathlib.Path("project.db")
@@ -51,5 +54,8 @@ def main():
     create_tables()
     insert_data_from_csv()
 
+
 if __name__ == "__main__":
+    logging.info("Program started") 
     main()
+    logging.info("Program ended")  

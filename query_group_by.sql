@@ -1,6 +1,6 @@
 
----- Query group-by 
--- Count the number of books by each author
-select author_id, count(*) as book_count
+-- Total number of books published each year
+select year_published, count(*) as total_books
 from books
-group by author_id;
+group by year_published
+order by year_published;

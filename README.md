@@ -2,7 +2,7 @@
 
 Title : Specification for Project 5 SQL Module
 
-Anjana Dhakal, May 22, 2024
+Anjana Dhakal, May 22, 2024(updated May 29, 2024)
 
 ## Overview
 Project 5 integrates Python and SQL, focusing on database interactions using SQLite. This project introduces logging, a useful tool for debugging and monitoring projects, and involves creating and managing a database, building a schema, and performing various SQL operations, including queries with joins, filters, and aggregations.
@@ -14,9 +14,12 @@ Create a Python script that demonstrates the ability to interact with a SQL data
  #create GitHub repository
 ```
  GitHub Repository: datafun-05-sql-
- Documentation: README.md
+ Documentation: README.me
+ Initialize script: db_initialize_anjana.py
+ Operations script: db_operations_anjana.py
+
 ```
-#clone to VS Code
+ #clone to VS Code
 ```
 git clone site_URL
 ```
@@ -37,40 +40,21 @@ source .\.venv\Scripts\activate
  py -m pip install pandas pyarrow
  py -m pip freeze > requirements.txt
 ```
-
-## Import Dependencies 
+## Git add and commit
 ```
-import sqlite3
-import pandas as pd
-import pathlib
+git add .
+git commit -m "Database interaction using SQLite Explorer"
+git push origin main
 ```
-## Add data folder and .csv
-Added a data folder to the project folder, then added two .csv files (authors and books) in VS Code.
-
-## Create Database(db)
+## Add Folder and files 
 ```
- # Define the database file in the current root project directory
- db_file = pathlib.Path("project.sqlite3")
-
-def create_database():
-    """Function to create a database. Connecting for the first time
-    will create a new database file if it doesn't exist yet.
-    Close the connection after creating the database
-    to avoid locking the file."""
-    try:
-        conn = sqlite3.connect(db_file)
-        conn.close()
-        print("Database created successfully.")
-    except sqlite3.Error as e:
-        print("Error creating the database:", e)
-
-def main():
-    create_database()
-
-if __name__ == "__main__":
-    main()
+Add a data folder to the project folder, then added two .csv files (authors and books) in VS Code.
+Add book_manager.py file to create a database, and fill with inofrmation from CSV files. 
 ```
-## created create_tables.sql
+## Worked on Different SQL Operations
+Implement SQL statements and queries to perform additional operations and use Python to execute SQL statements.
+
+1. Create create_tables.sql
 ```
 CREATE TABLE authors (
     author_id TEXT PRIMARY KEY,
@@ -85,70 +69,74 @@ CREATE TABLE books (
     FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
 ```
-## created book_manager.py
+2. Create insert_data.sql file
 ```
-import sqlite3
-import pandas as pd
-import pathlib
+insert into authors (author_id, first_name, last_name) values
 
-# Define the database file in the current root project directory
-db_file = pathlib.Path("project.db")
+insert into books (book_id, title, year_published, author_id) values
 
-def create_database():
-    """Function to create a database. Connecting for the first time
-    will create a new database file if it doesn't exist yet.
-    Close the connection after creating the database
-    to avoid locking the file."""
-    try:
-        conn = sqlite3.connect(db_file)
-        conn.close()
-        print("Database created successfully.")
-    except sqlite3.Error as e:
-        print("Error creating the database:", e)
-
-def create_tables():
-    """ Function to read and execute SQL statements to create tables"""
-    try:
-        with sqlite3.connect(db_file) as conn:
-            sql_file = "C:\\Users\\AnjanaD\\Documents\\datafun-05-sql-\\create_tables.sql"
-            with open(sql_file, "r") as file:
-                sql_script = file.read()
-            conn.executescript(sql_script)
-            print("Tables created successfully.")
-    except sqlite3.Error as e:
-        print("Error creating tables:", e)
-
-def insert_data_from_csv():
-    """ Function to use pandas to read data from CSV files (in 'data' folder)
-    and insert the records into their respective tables."""
-    try:
-        author_data_path = pathlib.Path("data", "authors.csv")
-        book_data_path = pathlib.Path("data", "books.csv")
-        authors_df = pd.read_csv(author_data_path)
-        books_df = pd.read_csv(book_data_path)
-        with sqlite3.connect(db_file) as conn:
-            # use the pandas DataFrame to_sql() method to insert data
-            # pass in the table name and the connection
-            authors_df.to_sql("authors", conn, if_exists="replace", index=False)
-            books_df.to_sql("books", conn, if_exists="replace", index=False)
-            print("Data inserted successfully.")
-    except (sqlite3.Error, pd.errors.EmptyDataError, FileNotFoundError) as e:
-        print("Error inserting data:", e)
-
-def main():
-    create_database()
-    create_tables()
-    insert_data_from_csv()
-
-if __name__ == "__main__":
-    main()
 ```
- 
-## Git add and commit
+3. Create select_records.sql file
 ```
-git add .
-git commit -m "Database interaction using SQLite Explorer"
-git push origin main
+#select all records from the authors table
+select * from authors;
+
+#select all records from the books table
+select * from books;
+```
+4. Create update_records.sql file
+```
+#update records in the authors table where first name contains 'F. Scott'
+update authors
+set first = 'Anjana', last = 'Dhakal'
+where first = 'F. Scott';
+
+#update records in the books table where year_published is 1960
+set title = 'The Great Mountains'
+where year_published = '1960';
+```
+5. Create delete_records.sql file
+```
+#delete records from the authors table where first name is Anjana 
+delete from authors
+where first = 'Anjana';
+
+#delete records from the bookss table where title is "The Great Mountains"
+delete from  books
+where title = 'The Great Mountains' ;
+```
+6. Create query_aggregation.sql file
+```
+select 
+count(*) as total_books,
+avg(year_published) as average_year_published,
+min(year_published) as earliset_year,
+max(year_published) as latest_year 
+from books;
+```
+7. Create query_filter.sql files
+```
+select first, last from authors 
+where first like 'j%';
+```
+8. Create query_sorting.sql file
+```
+select * from books
+order by year_published desc;
+```
+9. Create query_group_by.sql file
+```
+select year_published, count(*) as total_books
+from books
+group by year_published
+order by year_published;
+```
+10. Create query_join.sql file
+```
+select a.first, a.last, b.title, b.year_published
+from authors a
+inner join books b on a.author_id = b.author_id;
+
 ```
 
 ## Source
