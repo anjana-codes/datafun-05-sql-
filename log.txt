@@ -23,3 +23,8 @@
 2024-05-31 23:00:04,196 - INFO - All SQL operations completed successfully
 2024-05-31 23:00:04,196 - INFO - Program started
 2024-05-31 23:00:04,292 - INFO - Program ended
+2024-05-31 23:06:36,014 - INFO - Program started
+2024-05-31 23:06:36,014 - INFO - Program ended
+2024-05-31 23:06:36,014 - INFO - All SQL operations completed successfully
+2024-05-31 23:06:36,014 - INFO - Program started
+2024-05-31 23:06:36,127 - INFO - Program ended

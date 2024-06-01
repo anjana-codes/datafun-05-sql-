@@ -43,7 +43,7 @@ source .\.venv\Scripts\activate
 ## Git add and commit
 ```
 git add .
-git commit -m "Database interaction using SQLite Explorer"
+git commit -m "initial work"
 git push origin main
 ```
 ## Add Folder and files 
@@ -51,7 +51,18 @@ git push origin main
 Add a data folder to the project folder, then added two .csv files (authors and books) in VS Code.
 Add book_manager.py file to create a database, and fill with inofrmation from CSV files. 
 ```
-## Worked on Different SQL Operations
+
+## Logging
+```
+import logging
+
+# Configure logging to write to a file, appending new logs to the existing file
+logging.basicConfig(filename='log.txt', level=logging.DEBUG, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+
+logging.info("Program started") # add this at the beginning of the main method
+logging.info("Program ended")  # add this at the end of the main method
+```
+## Different SQL Operations
 Implement SQL statements and queries to perform additional operations and use Python to execute SQL statements.
 
 1. Create create_tables.sql
@@ -139,7 +150,40 @@ SELECT a.first, a.last, b.title, b.year_published
 FROM authors a
 INNER JOIN books b on a.author_id = b.author_id;
 ```
+## Python and SQL Integration
+```
+import sqlite3
 
+def execute_sql_from_file(db_filepath, sql_file):
+    with sqlite3.connect(db_filepath) as conn:
+        with open(sql_file, 'r') as file:
+            sql_script = file.read()
+        conn.executescript(sql_script)
+        print(f"Executed SQL from {sql_file}")
+
+```
+## Define Main Function for SQL Operations Script
+```
+def main():
+    insert_data_from_csv()
+    insert_records()
+    update_records()
+    select_records()
+    delete_records()
+    query_aggregation()
+    query_filter()
+    query_sorting()
+    query_group_by()
+    query_join()
+
+logging.info("All SQL operations completed successfully")
+
+if __name__ == "__main__":
+    logging.info("Program started") # add this at the beginning of the main method
+    main()
+    logging.info("Program ended")  # add this at the end of the main method
+
+```
 ## Repeat Git add and commit
 ```
 git add .
