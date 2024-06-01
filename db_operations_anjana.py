@@ -1,4 +1,7 @@
 '''
+Title: Specification for Project 5 SQL Module
+
+Overview:
 Here, I created a databse, added tables to the databse, filled the tables with data from both CSV and .sql files.
 Then worked on different SQL operations like update, delete, sorting, join etc. 
 All of this is doccumented in the README.
@@ -6,6 +9,14 @@ All of this is doccumented in the README.
 import sqlite3
 import pandas as pd
 import pathlib
+import logging 
+
+
+# Configure logging to write to a file, appending new logs to the existing file
+logging.basicConfig(filename='log.txt', level=logging.DEBUG, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+
+logging.info("Program started") # add this at the beginning of the main method
+logging.info("Program ended")  # add this at the end of the main method
 
 # Define the database file in the current root project directory
 db_file = "C:\\Users\\AnjanaD\\Documents\\datafun-05-sql-\\project.db"
@@ -31,7 +42,7 @@ def insert_records():
     """Function to read and execute SQL statements to insert data"""
     try:
         with sqlite3.connect(db_file) as conn:
-            sql_file = "C:\\Users\\AnjanaD\\Documents\\datafun-05-sql-\\insert_records.sql"
+            sql_file = pathlib.Path("insert_records.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -92,8 +103,6 @@ def query_aggregation():
             result = cursor.fetchone()
             print("total_books:", result[0])
             print("average_year_published:", round(result[1]))
-            print("earliest_year:", round(result[2]), "characters.")
-            print("latest_year:", round(result[2]), "characters.")
     except sqlite3.Error as e:
         print("Error querying aggregation for books:", e)
 
@@ -175,5 +184,9 @@ def main():
     query_group_by()
     query_join()
 
+logging.info("All SQL operations completed successfully")
+
 if __name__ == "__main__":
+    logging.info("Program started") # add this at the beginning of the main method
     main()
+    logging.info("Program ended")  # add this at the end of the main method

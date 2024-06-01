@@ -1,4 +1,4 @@
---Sort books by first name in ascending order:
-select * from books
-order by year_published desc;
+--Sort books by year_published in descending order:
+SELECT * FROM books
+ORDER BY year_published DESC;
 

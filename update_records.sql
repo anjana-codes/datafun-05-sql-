@@ -1,8 +1,9 @@
--- Update records in the authors table when first name contains 'a'
-update authors
-set first = 'Anjana', last = 'Dhakal'
-where first = 'F. Scott';
+-- Update records in the authors table 
+UPDATE authors
+SET first = 'Anjana', last = 'Dhakal'
+WHERE first = 'F. Scott';
 
-update books
-set title = 'The Great Mountains'
-where year_published = '1960';
+--Update records in the books table
+UPDATE books
+SET title = 'The Great Mountains'
+WHERE year_published = '1960';

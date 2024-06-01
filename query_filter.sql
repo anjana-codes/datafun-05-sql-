@@ -1,4 +1,4 @@
 
 
 -- ---- Query to filter author data 
-select first, last from authors where first like 'j%';
+SELECT first, last FROM authors WHERE first LIKE 'j%';

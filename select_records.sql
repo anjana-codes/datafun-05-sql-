@@ -1,3 +1,5 @@
--- select all authors and books data
-select * from authors;
-select * from books;
+-- select all authors 
+SELECT  * FROM authors;
+
+-- select all books
+SELECT * FROM books;
