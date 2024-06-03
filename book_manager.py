@@ -24,7 +24,7 @@ def create_tables():
     """Function to read and execute SQL statements to create tables"""
     try:
         with sqlite3.connect(db_file) as conn:
-            sql_file = "C:\\Users\\AnjanaD\\Documents\\datafun-05-sql-\\create_tables.sql"
+            sql_file = pathlib.Path("sql").joinpath("create_tables.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -36,8 +36,8 @@ def insert_data_from_csv():
     """Function to use pandas to read data from CSV files (in 'data' folder)
     and insert the records into their respective tables."""
     try:
-        author_data_path = pathlib.Path("data", "authors.csv")
-        book_data_path = pathlib.Path("data", "books.csv")
+        author_data_path = pathlib.Path("data").joinpath("authors.csv")
+        book_data_path = pathlib.Path("data").joinpath("books.csv")
         authors_df = pd.read_csv(author_data_path)
         books_df = pd.read_csv(book_data_path)
         with sqlite3.connect(db_file) as conn:

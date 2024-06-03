@@ -25,8 +25,8 @@ def insert_data_from_csv():
     """Function to use pandas to read data from CSV files (in 'data' folder)
     and insert the records into their respective tables."""
     try:
-        author_data_path = pathlib.Path("data", "authors.csv")
-        book_data_path = pathlib.Path("data", "books.csv")
+        author_data_path = pathlib.Path("data").joinpath("authors.csv")
+        book_data_path = pathlib.Path("data").joinpath("books.csv")
         authors_df = pd.read_csv(author_data_path)
         books_df = pd.read_csv(book_data_path)
         with sqlite3.connect(db_file) as conn:
@@ -42,7 +42,7 @@ def insert_records():
     """Function to read and execute SQL statements to insert data"""
     try:
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("insert_records.sql")
+            sql_file = pathlib.Path("sql").joinpath("insert_records.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -55,7 +55,7 @@ def update_records():
     try:
         db_file = pathlib.Path("project.db")
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("update_records.sql")
+            sql_file = pathlib.Path("sql").joinpath("update_records.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -69,7 +69,7 @@ def select_records():
     try:
         db_file = pathlib.Path("project.db")
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("select_records.sql")
+            sql_file = pathlib.Path("sql").joinpath("select_records.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -83,7 +83,7 @@ def delete_records():
     try:
         db_file = pathlib.Path("project.db")
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("delete_records.sql")
+            sql_file = pathlib.Path("sql").joinpath("delete_records.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             conn.executescript(sql_script)
@@ -96,7 +96,7 @@ def query_aggregation():
     try:
         db_file = pathlib.Path("project.db")
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("query_aggregation.sql")
+            sql_file = pathlib.Path("sql").joinpath("query_aggregation.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             cursor = conn.execute(sql_script)
@@ -111,7 +111,7 @@ def query_filter():
     try:
         db_file = pathlib.Path("project.db")
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("query_filter.sql")
+            sql_file = pathlib.Path("sql").joinpath("query_filter.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             cursor = conn.execute(sql_script)
@@ -126,7 +126,7 @@ def query_sorting():
     try:
         db_file = pathlib.Path("project.db")
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("query_sorting.sql")
+            sql_file = pathlib.Path("sql").joinpath("query_sorting.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             cursor = conn.execute(sql_script)
@@ -141,7 +141,7 @@ def query_group_by():
     try:
         db_file = pathlib.Path("project.db")
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("query_group_by.sql")
+            sql_file = pathlib.Path("sql").joinpath("query_group_by.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             cursor = conn.cursor()
@@ -159,7 +159,7 @@ def query_join():
     """Function to read and execute SQL statements to perform INNER JOIN and display the results"""
     try:
         with sqlite3.connect(db_file) as conn:
-            sql_file = pathlib.Path("query_join.sql")
+            sql_file = pathlib.Path("sql").joinpath("query_join.sql")
             with open(sql_file, "r") as file:
                 sql_script = file.read()
             cursor = conn.execute(sql_script)
