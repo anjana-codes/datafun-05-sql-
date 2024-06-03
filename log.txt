@@ -44,3 +44,10 @@
 2024-06-03 13:04:30,042 - INFO - All SQL operations completed successfully
 2024-06-03 13:04:30,042 - INFO - Program started
 2024-06-03 13:04:30,167 - INFO - Program ended
+2024-06-03 13:12:16,902 - INFO - Program started
+2024-06-03 13:12:16,902 - INFO - Program ended
+2024-06-03 13:12:16,902 - INFO - All SQL operations completed successfully
+2024-06-03 13:12:16,902 - INFO - Program started
+2024-06-03 13:12:17,018 - INFO - Program ended
+2024-06-03 13:12:20,747 - INFO - Program started
+2024-06-03 13:12:20,835 - INFO - Program ended
